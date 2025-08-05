@@ -1,0 +1,47 @@
+:root {
+    --cor-fundo: #ffd900b6 ;
+    --cor-principal: #ffffffff ;
+    --cor-secundaria: #cab919ff; 
+    --cor-destaque: #000000ff;
+    --cor-texto: #000000ff;
+}
+
+body {
+    background-image: url('ouo.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    color: var(--cor-texto);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.caixa-principal {
+    background-color: var(--cor-principal);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px; /* Apenas um toque extra para deixar mais estilizado */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adicionando uma leve sombra para destacar o conteúdo */
+}
+
+h1 {
+    color: var(--cor-destaque);
+}
+
+button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: 15px;
+    padding: 15px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--cor-destaque);
+    color: var(--cor-principal);
+}
