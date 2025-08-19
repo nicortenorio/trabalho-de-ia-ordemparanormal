@@ -45,3 +45,99 @@ button:hover {
     background-color: var(--cor-destaque);
     color: var(--cor-principal);
 }
+<style>
+    .botao-comecar {
+        padding: 15px 30px;
+        font-size: 18px;
+        background-color: #2c3e50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 20px auto;
+        display: block;
+        transition: background-color 0.3s;
+    }
+    
+    .botao-comecar:hover {
+        background-color: #1a252f;
+    }
+    
+    .caixa-inicio {
+        text-align: center;
+        padding: 20px;
+    }
+</style>
+
+<!-- Adicione este HTML onde você quer que o botão apareça -->
+<div class="caixa-inicio">
+    <button class="botao-comecar">Começar</button>
+</div>
+Agora, modifique o JavaScript para incluir a funcionalidade do botão:
+
+javascript
+const caixaPrincipal = document.querySelector(".caixa-principal");
+const caixaPerguntas = document.querySelector(".caixa-perguntas");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
+const caixaResultado = document.querySelector(".caixa-resultado");
+const textoResultado = document.querySelector(".texto-resultado");
+const botaoComecar = document.querySelector(".botao-comecar");
+const caixaInicio = document.querySelector(".caixa-inicio");
+
+// Suas perguntas aqui (mantidas iguais)...
+
+let atual = 0;
+let perguntaAtual;
+let historiaFinal = "";
+
+// Esconder elementos iniciais
+caixaPerguntas.style.display = "none";
+caixaAlternativas.style.display = "none";
+caixaResultado.style.display = "none";
+
+// Função para iniciar a experiência
+function comecarExperiencia() {
+    caixaInicio.style.display = "none";
+    caixaPerguntas.style.display = "block";
+    caixaAlternativas.style.display = "block";
+    atual = 0;
+    historiaFinal = "";
+    mostraPergunta();
+}
+
+// Adicionar evento de clique ao botão
+botaoComecar.addEventListener("click", comecarExperiencia);
+
+function mostraPergunta() {
+    if (atual >= perguntas.length) {
+        mostraResultado();
+        return;
+    }
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
+    mostraAlternativas();
+}
+
+function mostraAlternativas(){
+    for(const alternativa of perguntaAtual.alternativas) {
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+}
+
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacoes = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacoes + " ";
+    atual++;
+    mostraPergunta();
+}
+
+function mostraResultado() {
+    caixaPerguntas.textContent = "A realidade se desfaz...";
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = "";
+    caixaResultado.style.display = "block";
+}
